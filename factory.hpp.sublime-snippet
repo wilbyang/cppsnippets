@@ -1,0 +1,19 @@
+
+
+<snippet>
+	<content><![CDATA[
+#include <utility>
+
+template <typename T, typename... Args>
+T create(Args&&... args)
+{
+  //...
+  return T{std::forward<Args>(args)...};
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cppfactory</tabTrigger>
+	
+</snippet>
+

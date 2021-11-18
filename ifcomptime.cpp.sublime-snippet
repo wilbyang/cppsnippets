@@ -1,0 +1,20 @@
+
+
+<snippet>
+	<content><![CDATA[
+#include "ifcomptime.hpp"
+#include <iostream>
+
+int main()
+{
+  std::cout << asString(42) << '\n';
+  std::cout << asString(std::string("hello")) << '\n';
+  std::cout << asString("hello") << '\n';
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cppifcomptime</tabTrigger>
+	
+</snippet>
+

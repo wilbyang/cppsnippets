@@ -1,0 +1,24 @@
+
+
+<snippet>
+	<content><![CDATA[
+
+template<typename T>
+const T& spaceBefore(const T& arg) {
+  std::cout << ' ';
+  return arg;
+}
+
+template <typename First, typename... Args>
+void print (const First& firstarg, const Args&... args) {
+  std::cout << firstarg;
+  (std::cout << ... << spaceBefore(args)) << '\n';
+}
+
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cppaddspace</tabTrigger>
+	
+</snippet>
+
