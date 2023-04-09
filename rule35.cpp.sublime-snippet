@@ -1,0 +1,27 @@
+
+
+<snippet>
+	<content><![CDATA[
+class ABC
+{
+public:
+    virtual ~ABC();
+
+    ABC(const ABC&) = delete;
+    ABC(ABC&&) = delete;
+
+    ABC& operator=(const ABC&) = delete;
+    ABC& operator=(ABC&&) = delete;
+};
+/**
+ 我告诉你一个识别 C++ 代码质量的诀窍：找几个 class，如果其 dtor 有 delete 或释放资源的操作，看看作者是否同时正确禁用了 copy ctor 和 assignment operator（或者正确实现了它们，如果 class 确实应该是 copyable 的话），这反映了作者设计 C++ class 的基本功：正确管理内存和其他资源，以及他有没有认真读过 Effective C++。
+
+我认为 C++ 标准应该这样规定，只要用户自己定义了 dtor，就默认禁掉 copy ctor 和 operator=，这样更安全。此时，如果确实有需要，用户可以自己定义 copy ctor 和 operator=。
+**/
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cpprule35</tabTrigger>
+	
+</snippet>
+
