@@ -1,0 +1,47 @@
+<snippet>
+	<content><![CDATA[
+#include <memory>
+#include <iostream>
+
+struct Service { // Base interface
+    virtual void make_important_call() = 0;
+};
+
+struct FakeService : Service { // Fake implementation for testing
+    void make_important_call() override {
+        std::cout << "Fake Service.\n";
+    }
+};
+
+struct ProductionService : Service { // Real implementation
+    void make_important_call() override {
+        std::cout << "Production Service.\n";
+    }
+};
+
+struct MyClass {
+    MyClass(std::unique_ptr<Service> service) : // Inject dependency
+        dependency_(std::move(service)) {}
+
+    void operate() {
+        dependency_->make_important_call();
+    }
+private:
+    std::unique_ptr<Service> dependency_;
+};
+
+int main() {
+    // In production code:
+    MyClass m(std::make_unique<ProductionService>());
+    m.operate();
+
+    // In test code:
+    MyClass n(std::make_unique<FakeService>());
+    n.operate();
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cppdesignpatterndependencyinjection</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
