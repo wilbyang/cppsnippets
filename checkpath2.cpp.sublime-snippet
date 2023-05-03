@@ -37,6 +37,6 @@ int main(int argc, char* argv[])
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>cppcheckpath2</tabTrigger>
-	
+	<scope>source.c++</scope>
 </snippet>
 
