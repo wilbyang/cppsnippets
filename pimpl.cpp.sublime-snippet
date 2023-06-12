@@ -1,0 +1,57 @@
+
+
+<snippet>
+	<content><![CDATA[
+
+//pubic.h
+#include <memory>
+
+class PublicClass {
+ public:
+    PublicClass();
+    ~PublicClass();
+    void publicMethod();
+ private:
+    class PImplClass;
+    std::unique_ptr<PImplClass> pImpl;
+};
+//public.cpp
+
+#include <iostream>
+#include <string>
+#include "public.h"
+
+class PublicClass::PImplClass {
+ public:
+    void DoPrivateStuff() {
+        std::cout << className << "::privateMethod\n";
+    }
+ private:
+    std::string className = "PublicClass";
+};
+
+PublicClass::PublicClass(): pImpl(new PImplClass) {}
+PublicClass::~PublicClass() = default;
+
+void PublicClass::publicMethod() {
+    std::cout << "PublicClass::publicMethod\n";
+    pImpl->DoPrivateStuff();
+}
+
+// main.cpp
+#include "public.h"
+
+int main() {
+
+    PublicClass pub;
+    pub.publicMethod();
+
+}
+
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cpppimpl</tabTrigger>
+	<scope>source.c++</scope>
+</snippet>
+
