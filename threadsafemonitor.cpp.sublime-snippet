@@ -94,7 +94,7 @@ int main(){
 
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>cppscan</tabTrigger>
+	<tabTrigger>threadsafemonitor</tabTrigger>
   <scope>source.c++</scope>
 	
 </snippet>
