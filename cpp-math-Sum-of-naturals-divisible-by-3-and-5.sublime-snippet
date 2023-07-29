@@ -1,0 +1,29 @@
+
+<snippet>
+    <content><![CDATA[
+
+#include <iostream>
+
+int main()
+{
+   unsigned int limit = 0;
+   std::cout << "Upper limit:";
+   std::cin >> limit;
+
+   unsigned long long sum = 0;
+   for (unsigned int i = 3; i < limit; ++i)
+   {
+      if (i % 3 == 0 || i % 5 == 0)
+         sum += i;
+   }
+
+   std::cout << "sum=" << sum << std::endl;
+}
+
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>math-Sum-of-naturals-divisible-by-3-and-5</tabTrigger>
+    <scope>source.c++</scope>
+    
+</snippet>
+                
