@@ -1,0 +1,25 @@
+<snippet>
+	<content><![CDATA[
+
+#include <algorithm>
+#include <array>
+
+struct Merchant {
+  int id;
+};
+
+constexpr auto has_merchant(const Merchant& selected) {
+  auto merchants = std::array{Merchant{1}, Merchant{2}, Merchant{3},
+                              Merchant{4}, Merchant{5}};
+  return std::binary_search(merchants.begin(), merchants.end(), selected,
+                            [](auto a, auto b) { return a.id < b.id; });
+}
+
+int main() { return has_merchant({4}); }
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cppconstexpr</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
