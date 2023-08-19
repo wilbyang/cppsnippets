@@ -1,0 +1,38 @@
+<snippet>
+	<content><![CDATA[
+		#include <iostream>
+using namespace std;
+
+class MyClass {
+private:
+  int myVar;
+
+  friend void myCustomFunction(MyClass& obj, int value);
+
+public:
+  MyClass(int value) : myVar(value) {}
+
+  void printMyVar() {
+    cout << "myVar = " << myVar << endl;
+  }
+};
+
+void myCustomFunction(MyClass& obj, int value) {
+  obj.myVar = value;
+}
+
+int main() {
+  MyClass obj(5);
+  obj.printMyVar(); // Output: myVar = 5
+
+  myCustomFunction(obj, 10);
+  obj.printMyVar(); // Output: myVar = 10
+
+  return 0;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cppfriendfunc</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
