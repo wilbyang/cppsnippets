@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[
+cmake_minimum_required(VERSION 3.12)
+project(MyProject)
+
+set(CMAKE_CXX_STANDARD 20)
+
+add_executable(MyExecutable tmp.cpp)
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cppbuild</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
