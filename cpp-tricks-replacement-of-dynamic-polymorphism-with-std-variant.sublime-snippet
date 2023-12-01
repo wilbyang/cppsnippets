@@ -1,0 +1,58 @@
+
+<snippet>
+    <content><![CDATA[
+#include <iostream>
+#include <variant>
+#include <string>
+
+// Define the types that can be stored in the variant
+struct Circle {
+    double radius;
+};
+
+struct Square {
+    double side;
+};
+
+// Define a shape as a variant of Circle and Square
+using Shape = std::variant<Circle, Square>;
+
+// Function to compute the area of a shape using visitor pattern
+struct AreaVisitor {
+    double operator()(const Circle& circle) const {
+        return 3.14 * circle.radius * circle.radius;
+    }
+
+    double operator()(const Square& square) const {
+        return square.side * square.side;
+    }
+};
+
+double computeArea(const Shape& shape) {
+    return std::visit(AreaVisitor{}, shape);
+}
+
+int main() {
+    // Create instances of Circle and Square
+    Circle circle{2.0};
+    Square square{3.0};
+
+    // Create instances of Shape using the Circle and Square
+    Shape shape1 = circle;
+    Shape shape2 = square;
+
+    // Compute and print the area of each shape
+    std::cout << "Area of Circle: " << computeArea(shape1) << std::endl;
+    std::cout << "Area of Square: " << computeArea(shape2) << std::endl;
+
+    return 0;
+}
+
+
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>tricks-Effective-replacement-of-dynamic-polymorphism-with-std-variant</tabTrigger>
+    <scope>source.c++</scope>
+    
+</snippet>
+                

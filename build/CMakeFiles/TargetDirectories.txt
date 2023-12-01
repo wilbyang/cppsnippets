@@ -1,0 +1,3 @@
+/Users/boya/Library/Application Support/Sublime Text/Packages/User/cppsnippets/build/CMakeFiles/MyExecutable.dir
+/Users/boya/Library/Application Support/Sublime Text/Packages/User/cppsnippets/build/CMakeFiles/edit_cache.dir
+/Users/boya/Library/Application Support/Sublime Text/Packages/User/cppsnippets/build/CMakeFiles/rebuild_cache.dir

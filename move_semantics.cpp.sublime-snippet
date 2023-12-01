@@ -113,7 +113,7 @@ int main() {
 
 ]]></content>
     <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>15445-bootcamp-move_semantics</tabTrigger>
+    <tabTrigger>cmu15445-bootcamp-move_semantics</tabTrigger>
     <!-- Optional: Set a scope to limit where the snippet will trigger -->
     <scope>source.c++</scope>
 </snippet>
