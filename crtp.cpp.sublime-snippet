@@ -56,7 +56,7 @@ int main()
 }
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>cpprule35</tabTrigger>
+	<tabTrigger>cppcrtp</tabTrigger>
 	<scope>source.c++</scope>
 	
 </snippet>
