@@ -1,0 +1,85 @@
+<snippet>
+    <content><![CDATA[
+
+#include <memory>
+#include <unordered_map>
+#include <thread>
+#include <list>
+#include <functional>
+#include <string>
+#include <mutex>
+
+template <typename Data, uint32_t capacity = 64>
+struct LRU {
+    using ProviderType = std::function<std::unique_ptr<Data>(const std::string&)>;
+    LRU(ProviderType provider) : provider_(std::move(provider)) {}
+
+    // Get the data by key, either from the cache or from the canonical provider.
+    std::shared_ptr<const Data> get(const std::string& key) {
+        std::scoped_lock lock(mux_); // acquire lock, we will be mutating state
+        if (auto it = map_.find(key); it != map_.end()) { // happy path first
+            bump_to_most_recently_used(it->second);
+            return it->second->data;
+        } else {
+            // if the key isn't in the cache, use the provider 
+            // to generate the data
+            return insert_from_provider(key); 
+        }
+    }
+
+private:
+    ProviderType provider_;
+    struct Store {
+        std::string key;
+        std::shared_ptr<const Data> data;
+    };
+    std::list<Store> stable_;
+    std::unordered_map<std::string, typename std::list<Store>::iterator> map_;
+    std::mutex mux_;
+
+    void bump_to_most_recently_used(std::list<Store>::iterator it) {
+        stable_.splice(stable_.begin(), stable_, it);
+    }
+
+    void drop_least_recently_used() {
+        auto it = std::prev(stable_.end());
+        map_.erase(it->key);
+        stable_.erase(it);
+    }
+
+    std::shared_ptr<const Data> insert_from_provider(const std::string& key) {
+        if (map_.size() == capacity)
+            drop_least_recently_used();
+        auto it = stable_.insert(stable_.begin(), {
+            key,
+            provider_(key)
+        });
+        map_.insert_or_assign(key, it);
+        return it->data;
+    }
+};
+
+#include <format>
+#include <print>
+
+struct Blob {
+    std::string data;
+};
+
+int main() {
+    LRU<Blob> cache([](const std::string& key) -> std::unique_ptr<Blob> {
+        return std::make_unique<Blob>(std::format("{}->{}", key, key));
+    });
+
+    auto v1 = cache.get("cat"); // not in cache
+    std::println("v1->data == \"{}\"", v1->data);
+    auto v2 = cache.get("cat"); // in cache
+    std::println("(v1 == v2) == {}", (v1 == v2));
+}
+
+
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>cpplru</tabTrigger>
+    <scope>source.c++</scope>
+</snippet>
